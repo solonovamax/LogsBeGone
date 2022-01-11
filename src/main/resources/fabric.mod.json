@@ -1,0 +1,30 @@
+{
+    "schemaVersion": 1,
+    "id":            "anti-ignoring-chunk",
+    "version":       "${version}",
+
+    "name":          "AntiIgnoringChunk",
+    "description":   "Removes annoying \"Ignoring chunk since it's not in the view range\" log messages",
+    "authors":       [ "solonovamax" ],
+    "contact":       {
+        "website": "https://github.com/solonovamax/AntiIgnoringChunk",
+        "repo":    "https://github.com/solonovamax/AntiIgnoringChunk"
+    },
+
+    "license":       "MIT",
+
+    "environment":   "client",
+    "entrypoints":   {
+        "main": [ "ca.solostudios.antiignoringchunk.AntiIgnoringChunk" ]
+    },
+
+    "mixins":        [
+        "AntiIgnoringChunk.mixins.json"
+    ],
+
+    "depends":       {
+        "fabricloader": ">=0.12.12",
+        "fabric":       "*",
+        "minecraft":    "1.18.1"
+    }
+}
