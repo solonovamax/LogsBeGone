@@ -1,13 +1,11 @@
 plugins {
-    id("fabric-loom") version "0.12-SNAPSHOT"
+    // id("fabric-loom") version "0.12-SNAPSHOT"
+    id("org.quiltmc.loom") version "1.0.9"
     id("maven-publish")
 }
 
-val version = findProperty("mod_version")!!
-val group = findProperty("maven_group")!!
-
-project.version = version
-project.group = group
+version = "1.1.0"
+group = "ca.solo-studios"
 
 repositories {
     // Add repositories to retrieve artifacts from in here.
@@ -18,18 +16,23 @@ repositories {
 }
 
 dependencies {
-    val minecraftVersion = findProperty("minecraft_version")
-    val yarnMappingsVersion = findProperty("yarn_mappings")
-    val loaderVersion = findProperty("loader_version")
-    val fabricVersion = findProperty("fabric_version")
+    val minecraftVersion by project.properties
+    val quiltMappingsVersion by project.properties
+    val loaderVersion by project.properties
+    val quiltedFabricApiVersion by project.properties
     
     // To change the versions see the gradle.properties file
     minecraft("com.mojang:minecraft:$minecraftVersion")
-    mappings("net.fabricmc:yarn:$yarnMappingsVersion:v2")
-    modImplementation("net.fabricmc:fabric-loader:$loaderVersion")
+    // mappings("net.fabricmc:yarn:$quiltMappingsVersion:v2")
+    mappings(loom.layered {
+        mappings("org.quiltmc:quilt-mappings:${minecraftVersion}+build.${quiltMappingsVersion}:intermediary-v2")
+        // addLayer("org.quiltmc:quilt-mappings:${quiltMappingsVersion}:intermediary-v2")
+    })
+    // mappings("org.quiltmc:quilt-mappings:${minecraftVersion}+build.${quiltMappingsVersion}:intermediary-v2")
+    modImplementation("org.quiltmc:quilt-loader:$loaderVersion")
     
     // Fabric API. This is technically optional, but you probably want it anyway.
-    modImplementation("net.fabricmc.fabric-api:fabric-api:$fabricVersion")
+    // modImplementation("net.fabricmc.fabric-api:fabric-api:$quiltedFabricApiVersion")
 }
 
 java {

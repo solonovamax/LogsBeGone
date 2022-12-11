@@ -1,9 +1,10 @@
 {
     "required":           true,
     "minVersion":         "0.8",
-    "package":            "ca.solostudios.antiignoringchunk.mixin",
+    "package":            "ca.solostudios.logsbegone.mixin",
     "compatibilityLevel": "JAVA_17",
     "mixins":             [
+        "ChunkMixin"
     ],
     "client":             [
         "ClientChunkManagerMixin"

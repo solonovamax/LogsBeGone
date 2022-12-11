@@ -1,4 +1,4 @@
-package ca.solostudios.antiignoringchunk.mixin;
+package ca.solostudios.logsbegone.mixin;
 
 import net.minecraft.client.world.ClientChunkManager;
 import org.slf4j.Logger;
@@ -14,6 +14,6 @@ public class ClientChunkManagerMixin {
               at = @At(value = "INVOKE",
                        target = "Lorg/slf4j/Logger;warn(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V"))
     public void ignoringChunkWarning(Logger logger, String message, Object p1, Object p2) {
-        logger.debug(message, p1, p2); // fuck you mojang
+//        logger.debug(message, p1, p2); // fuck you mojang
     }
 }

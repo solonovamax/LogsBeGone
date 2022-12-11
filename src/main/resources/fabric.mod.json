@@ -1,14 +1,19 @@
 {
     "schemaVersion": 1,
-    "id":            "anti-ignoring-chunk",
+    "id":            "logs-be-gone",
     "version":       "${version}",
 
-    "name":          "AntiIgnoringChunk",
-    "description":   "Removes annoying \"Ignoring chunk since it's not in the view range\" log messages",
-    "authors":       [ "solonovamax" ],
+    "name":          "Logs Be Gone",
+    "description":   "Removes annoying and spammy log messages",
+    "authors":       [
+        "solonovamax"
+    ],
     "contact":       {
-        "website": "https://github.com/solonovamax/AntiIgnoringChunk",
-        "repo":    "https://github.com/solonovamax/AntiIgnoringChunk"
+        "website": "https://github.com/solonovamax/LogsBeGone",
+        "repo":    "https://github.com/solonovamax/LogsBeGone",
+        "homepage": "https://github.com/solonovamax/LogsBeGone",
+        "issues": "https://github.com/solonovamax/LogsBeGone/issues",
+        "sources": "https://github.com/solonovamax/LogsBeGone"
     },
 
     "license":       "MIT",
@@ -16,16 +21,18 @@
 
     "environment":   "client",
     "entrypoints":   {
-        "main": [ "ca.solostudios.antiignoringchunk.AntiIgnoringChunk" ]
+        "main": [
+            "ca.solostudios.logsbegone.LogsBeGone"
+        ]
     },
 
     "mixins":        [
-        "AntiIgnoringChunk.mixins.json"
+        "LogsBeGone.mixins.json"
     ],
 
     "depends":       {
         "fabricloader": ">=0.12.12",
         "fabric":       "*",
-        "minecraft":    "1.18.2"
+        "minecraft":    "1.19.2"
     }
 }

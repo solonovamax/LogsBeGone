@@ -1,6 +1,6 @@
-# Anti 'Ignoring Chunk' mod
+# Logs Be Gone
 
-Don't like to see
+Don't like to see your logs spammed with messages like this?
 
 ```
 [23:21:46] [Render thread/WARN]: Ignoring chunk since it's not in the view range: 71, 65
@@ -28,8 +28,15 @@ Don't like to see
 [23:21:46] [Render thread/WARN]: Ignoring chunk since it's not in the view range: 77, 75
 ```
 
-in your log file?
-
 Then this mod is for you!
 
-It removes that logging message!! amazing!!
+It removes that logging message and several others!! amazing!!
+
+Currently removed messages:
+
+- "Ignoring chunk since it's not in the view range"
+- "Trying to mark a block for PostProcessing @ {}, but this operation is not supported."
+
+Note: This mod doesn't simply filter the log messages, it actually stops them from being logged in the first place.
+This is beneficial, because those specific log messages can be very spammy and will actually incur a performance hit
+because of how often they are logged.
