@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2024 solonovamax <solonovamax@12oclockpoint.com>
  *
- * The file ChunkMixin.java is part of LogsBeGone
+ * The file BakedModelManagerMixin.java is part of LogsBeGone
  * Last modified on 16-12-2024 03:30 a.m.
  *
  * MIT License
@@ -25,19 +25,18 @@
  * SOFTWARE.
  */
 
-package ca.solostudios.logsbegone.mixin;
+package ca.solostudios.logsbegone.mixin.client;
 
-import net.minecraft.world.chunk.Chunk;
+import net.minecraft.client.render.model.BakedModelManager;
 import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(Chunk.class)
-public class ChunkMixin {
-
+@Mixin(BakedModelManager.class)
+public class BakedModelManagerMixin {
     @Redirect(
-            method = "markBlockForPostProcessing",
+            method = "method_65752",
             at = @At(
                     value = "INVOKE",
                     target = "Lorg/slf4j/Logger;warn(Ljava/lang/String;Ljava/lang/Object;)V",
@@ -45,7 +44,7 @@ public class ChunkMixin {
             ),
             require = 0
     )
-    public void silenceMarkBlockForPostProcessing(Logger logger, String message, Object arg) {
-        // logger.debug(message, arg);
+    private static void silenceCouldNotLoadAnimation(Logger logger, String message, Object arg) {
+        logger.debug(message, arg);
     }
 }

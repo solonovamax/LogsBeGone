@@ -1,0 +1,20 @@
+{
+    "required":           true,
+    "minVersion":         "0.8",
+    "package":            "ca.solostudios.logsbegone.mixin",
+    "compatibilityLevel": "JAVA_8",
+    "mixins":             [
+        "ChunkMixin",
+        "geckolib3.AnimationControllerMixin"
+    ],
+    "client":             [
+        "client.BakedModelManagerMixin",
+        "client.ClientChunkManagerMixin",
+        "client.ClientPlayNetworkHandlerMixin",
+        "client.ModelLoaderMixin",
+        "client.SpriteContentsMixin"
+    ],
+    "injectors":          {
+        "defaultRequire": 1
+    }
+}

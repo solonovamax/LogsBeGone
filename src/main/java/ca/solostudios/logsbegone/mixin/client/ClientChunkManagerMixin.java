@@ -2,7 +2,7 @@
  * Copyright (c) 2024 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file ClientChunkManagerMixin.java is part of LogsBeGone
- * Last modified on 16-12-2024 01:41 a.m.
+ * Last modified on 16-12-2024 03:30 a.m.
  *
  * MIT License
  *
@@ -25,7 +25,7 @@
  * SOFTWARE.
  */
 
-package ca.solostudios.logsbegone.mixin;
+package ca.solostudios.logsbegone.mixin.client;
 
 import net.minecraft.client.world.ClientChunkManager;
 import org.slf4j.Logger;
@@ -40,10 +40,12 @@ public class ClientChunkManagerMixin {
             method = "loadChunkFromPacket",
             at = @At(
                     value = "INVOKE",
-                    target = "Lorg/slf4j/Logger;warn(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V"
-            )
+                    target = "Lorg/slf4j/Logger;warn(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V",
+                    remap = false
+            ),
+            require = 0
     )
-    public void ignoringChunkWarning(Logger logger, String message, Object arg1, Object arg2) {
-        // logger.debug(message, arg1, arg2); // fuck you mojang
+    public void silenceIgnoringChunkWarning(Logger logger, String message, Object arg1, Object arg2) {
+        logger.debug(message, arg1, arg2);
     }
 }

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2024 solonovamax <solonovamax@12oclockpoint.com>
  *
- * The file ChunkMixin.java is part of LogsBeGone
+ * The file AnimationControllerMixin.java is part of LogsBeGone
  * Last modified on 16-12-2024 03:30 a.m.
  *
  * MIT License
@@ -25,27 +25,29 @@
  * SOFTWARE.
  */
 
-package ca.solostudios.logsbegone.mixin;
+package ca.solostudios.logsbegone.mixin.geckolib3;
 
-import net.minecraft.world.chunk.Chunk;
-import org.slf4j.Logger;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import software.bernie.geckolib3.core.controller.AnimationController;
 
-@Mixin(Chunk.class)
-public class ChunkMixin {
+import java.io.PrintStream;
 
+@Mixin(AnimationController.class)
+public class AnimationControllerMixin {
     @Redirect(
-            method = "markBlockForPostProcessing",
+            method = "lambda$setAnimation$0",
             at = @At(
                     value = "INVOKE",
-                    target = "Lorg/slf4j/Logger;warn(Ljava/lang/String;Ljava/lang/Object;)V",
-                    remap = false
+                    target = "Ljava/io/PrintStream;printf(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/PrintStream;"
             ),
-            require = 0
+            require = 0,
+            remap = false
     )
-    public void silenceMarkBlockForPostProcessing(Logger logger, String message, Object arg) {
-        // logger.debug(message, arg);
+    public PrintStream silenceCouldNotLoadAnimation(PrintStream instance, String format, Object[] args) {
+        // return instance.printf(format, args);
+        return instance;
     }
 }

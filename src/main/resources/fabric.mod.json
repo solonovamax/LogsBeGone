@@ -27,7 +27,7 @@
     },
 
     "mixins":        [
-        "LogsBeGone.mixins.json"
+        "mixins/logs-be-gone/logs-be-gone.mixins.json"
     ],
 
     "depends":       {

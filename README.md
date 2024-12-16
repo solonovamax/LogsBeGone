@@ -32,11 +32,12 @@ Then this mod is for you!
 
 It removes that logging message and several others!! amazing!!
 
-Currently removed messages:
+Currently suppressed log messages:
 
-- "Ignoring chunk since it's not in the view range"
-- "Trying to mark a block for PostProcessing @ {}, but this operation is not supported."
-
-Note: This mod doesn't simply filter the log messages, it actually stops them from being logged in the first place.
-This is beneficial, because those specific log messages can be very spammy and will actually incur a performance hit
-because of how often they are logged.
+- `Ignoring chunk since it's not in the view range: {}, {}`
+- `Received passengers for unknown entity`
+- `Unused frames in sprite {}: {}`
+- `Missing model for variant: '{}'`/`Exception loading blockstate definition: '{}' missing model for variant: '{}'`
+- `Trying to mark a block for PostProcessing @ {}, but this operation is not supported.`
+- [Geckolib 3.x `Could not load animation: %s. Is it missing?`](https://github.com/bernie-g/geckolib/issues/654) (Because they refused to
+  fix it themselves)

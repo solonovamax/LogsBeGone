@@ -32,3 +32,5 @@ fabric-loader = { group = "net.fabricmc", name = "fabric-loader", version.ref = 
 
 sponge-mixin = { group = "net.fabricmc", name = "sponge-mixin", version.ref = "mixin" }
 mixinextras = { group = "io.github.llamalad7", name = "mixinextras-fabric", version.ref = "mixinextras" }
+
+geckolib3-fabric = { group = "software.bernie.geckolib", name = "geckolib-fabric-1.19", version = "3.1.40" }
