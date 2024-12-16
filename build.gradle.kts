@@ -1,67 +1,128 @@
+/*
+ * Copyright (c) 2024 solonovamax <solonovamax@12oclockpoint.com>
+ *
+ * The file build.gradle.kts is part of LogsBeGone
+ * Last modified on 16-12-2024 01:23 a.m.
+ *
+ * MIT License
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * GRADLE-CONVENTIONS-PLUGIN IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+@file:Suppress("UnstableApiUsage")
+
+import ca.solostudios.nyx.plugin.minecraft.NyxMinotaurExtension.VersionType
+import ca.solostudios.nyx.util.fabric
+import ca.solostudios.nyx.util.soloStudios
+
 plugins {
-    // id("fabric-loom") version "0.12-SNAPSHOT"
-    id("org.quiltmc.loom") version "1.0.9"
-    id("maven-publish")
+    java
+
+    alias(libs.plugins.fabric.loom)
+
+    alias(libs.plugins.axion.release)
+
+    alias(libs.plugins.minotaur)
+
+    alias(libs.plugins.nyx)
 }
 
-version = "1.1.0"
-group = "ca.solo-studios"
+nyx {
+    compile {
+        javadocJar = true
+        sourcesJar = true
+
+        allWarnings = true
+        // warningsAsErrors = true
+        distributeLicense = true
+        buildDependsOnJar = true
+        jvmTarget = 17
+        reproducibleBuilds = true
+    }
+
+    info {
+        name = "LogsBeGone"
+        group = "gay.solonovamax"
+        module = "logs-be-gone"
+        version = scmVersion.version
+        description = """
+            Removes annoying and spammy log messages
+        """.trimIndent()
+
+        developer {
+            id = "solonovamax"
+            name = "solonovamax"
+            email = "solonovamax@12oclockpoint.com"
+            url = "https://solonovamax.gay"
+        }
+
+        repository.fromGithub("solonovamax", "LogsBeGone")
+        license.useMIT()
+    }
+
+    minecraft {
+        mixin {
+            hotswap = true
+            verbose = true
+            export = true
+
+            mixinRefmapName("logs-be-gone")
+        }
+
+        minotaur {
+            versionType = if (isSnapshot) VersionType.BETA else VersionType.RELEASE
+            projectId = "logs-be-gone"
+            detectLoaders = true
+        }
+    }
+}
 
 repositories {
-    // Add repositories to retrieve artifacts from in here.
-    // You should only use this when depending on other mods because
-    // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-    // See https://docs.gradle.org/current/userguide/declaring_repositories.html
-    // for more information about repositories.
+    soloStudios()
+    fabric()
+    mavenCentral()
 }
 
 dependencies {
-    val minecraftVersion by project.properties
-    val quiltMappingsVersion by project.properties
-    val loaderVersion by project.properties
-    val quiltedFabricApiVersion by project.properties
-    
-    // To change the versions see the gradle.properties file
-    minecraft("com.mojang:minecraft:$minecraftVersion")
-    // mappings("net.fabricmc:yarn:$quiltMappingsVersion:v2")
-    mappings(loom.layered {
-        mappings("org.quiltmc:quilt-mappings:${minecraftVersion}+build.${quiltMappingsVersion}:intermediary-v2")
-        // addLayer("org.quiltmc:quilt-mappings:${quiltMappingsVersion}:intermediary-v2")
-    })
-    // mappings("org.quiltmc:quilt-mappings:${minecraftVersion}+build.${quiltMappingsVersion}:intermediary-v2")
-    modImplementation("org.quiltmc:quilt-loader:$loaderVersion")
-    
-    // Fabric API. This is technically optional, but you probably want it anyway.
-    // modImplementation("net.fabricmc.fabric-api:fabric-api:$quiltedFabricApiVersion")
-}
+    minecraft(libs.minecraft)
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-    withSourcesJar()
+    modImplementation(libs.fabric.loader)
+    mappings(loom.layered {
+        mappings(variantOf(libs.yarn.mappings) { classifier("v2") })
+    })
+
+    annotationProcessor(libs.sponge.mixin)
+    implementation(libs.sponge.mixin)
+
+    annotationProcessor(libs.mixinextras)
+    implementation(libs.mixinextras)
 }
 
 tasks {
     processResources {
         inputs.property("version", project.version)
-        filteringCharset = "UTF-8"
-        
+
         filesMatching("fabric.mod.json") {
             expand("version" to project.version)
         }
     }
-    
-    withType(JavaCompile::class) {
-        // ensure that the encoding is set to UTF-8, no matter what the system default is
-        // this fixes some edge cases with special characters not displaying correctly
-        // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-        // If Javadoc is generated, this must be specified in that task too.
-        options.encoding = "UTF-8"
-        var release by options.release
-        release = 17
-    }
-    
-    jar {
-        from("LICENSE")
-    }
 }
+
+val Project.isSnapshot: Boolean
+    get() = version.toString().endsWith("-SNAPSHOT")
