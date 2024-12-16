@@ -5,6 +5,7 @@
     "compatibilityLevel": "JAVA_8",
     "mixins":             [
         "ChunkMixin",
+        "ClientConnectionMixin",
         "geckolib3.AnimationControllerMixin"
     ],
     "client":             [

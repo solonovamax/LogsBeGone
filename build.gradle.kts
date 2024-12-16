@@ -2,7 +2,7 @@
  * Copyright (c) 2024 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of LogsBeGone
- * Last modified on 16-12-2024 03:34 a.m.
+ * Last modified on 16-12-2024 06:46 p.m.
  *
  * MIT License
  *
@@ -53,6 +53,10 @@ nyx {
         buildDependsOnJar = true
         jvmTarget = 17
         reproducibleBuilds = true
+
+        java {
+            compilerArgs.addAll("-Xlint:-processing")
+        }
     }
 
     info {
@@ -107,6 +111,10 @@ dependencies {
         mappings(variantOf(libs.yarn.mappings) { classifier("v2") })
     })
 
+    // the MixinSquared annotation processor must be registered BEFORE the mixin annotation processor
+    annotationProcessor(libs.mixinsquared)
+    implementationInclude(libs.mixinsquared)
+
     annotationProcessor(libs.sponge.mixin)
     implementation(libs.sponge.mixin)
 
@@ -115,6 +123,10 @@ dependencies {
 
     modCompileOnly(libs.geckolib3.fabric) {
         isTransitive = false
+    }
+
+    modCompileOnly(libs.bundles.portinglib) {
+        exclude(group = "net.fabricmc.fabric-api")
     }
 }
 

@@ -12,6 +12,10 @@ fabric-yarn = "1.21.4+build.2"
 
 mixin = "0.15.4+mixin.0.8.7"
 mixinextras = "0.4.1"
+mixinsquared = "0.2.0"
+
+geckolib3 = "3.1.40"
+portinglib = "2.3.8+1.20.1"
 
 [plugins]
 nyx = { id = "ca.solo-studios.nyx", version.ref = "nyx" }
@@ -32,5 +36,16 @@ fabric-loader = { group = "net.fabricmc", name = "fabric-loader", version.ref = 
 
 sponge-mixin = { group = "net.fabricmc", name = "sponge-mixin", version.ref = "mixin" }
 mixinextras = { group = "io.github.llamalad7", name = "mixinextras-fabric", version.ref = "mixinextras" }
+mixinsquared = { group = "com.github.bawnorton.mixinsquared", name = "mixinsquared-fabric", version.ref = "mixinsquared" }
+geckolib3-fabric = { group = "software.bernie.geckolib", name = "geckolib-fabric-1.19", version.ref = "geckolib3" }
 
-geckolib3-fabric = { group = "software.bernie.geckolib", name = "geckolib-fabric-1.19", version = "3.1.40" }
+portinglib-core = { group = "io.github.fabricators_of_create.Porting-Lib", name = "core", version.ref = "portinglib" }
+portinglib-base = { group = "io.github.fabricators_of_create.Porting-Lib", name = "base", version.ref = "portinglib" }
+portinglib-common = { group = "io.github.fabricators_of_create.Porting-Lib", name = "base", version.ref = "portinglib" }
+
+[bundles]
+portinglib = [
+    "portinglib-base",
+    "portinglib-core",
+    "portinglib-common",
+]

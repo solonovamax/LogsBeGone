@@ -41,3 +41,8 @@ Currently suppressed log messages:
 - `Trying to mark a block for PostProcessing @ {}, but this operation is not supported.`
 - [Geckolib 3.x `Could not load animation: %s. Is it missing?`](https://github.com/bernie-g/geckolib/issues/654) (Because they refused to
   fix it themselves)
+- Several `Exception occurred in netty pipeline` messages:
+    - `io.netty.channel.unix.Errors$NativeIoException: (...) failed: Connection reset by peer`
+    - `java.nio.channels.ClosedChannelException: null`
+    - `io.netty.handler.timeout.ReadTimeoutException: null`
+    - `java.net.SocketException: Connection reset`
