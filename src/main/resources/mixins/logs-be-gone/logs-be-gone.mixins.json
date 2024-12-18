@@ -6,6 +6,7 @@
     "mixins":             [
         "ChunkMixin",
         "ClientConnectionMixin",
+        "bclib.MainConfigMixin",
         "geckolib3.AnimationControllerMixin"
     ],
     "client":             [

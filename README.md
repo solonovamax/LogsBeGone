@@ -46,3 +46,4 @@ Currently suppressed log messages:
     - `java.nio.channels.ClosedChannelException: null`
     - `io.netty.handler.timeout.ReadTimeoutException: null`
     - `java.net.SocketException: Connection reset`
+- Changes the default BCLib "verbose logging" config value to `false` (was previously `true`)

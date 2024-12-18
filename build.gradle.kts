@@ -2,7 +2,7 @@
  * Copyright (c) 2024 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of LogsBeGone
- * Last modified on 16-12-2024 07:59 p.m.
+ * Last modified on 18-12-2024 05:29 p.m.
  *
  * MIT License
  *
@@ -128,6 +128,9 @@ dependencies {
     modCompileOnly(libs.bundles.portinglib) {
         exclude(group = "net.fabricmc.fabric-api")
     }
+
+    // compileOnly instead of modCompileOnly because otherwise it breaks the compilation process (yay)
+    compileOnly("maven.modrinth:bclib:3.0.14")
 }
 
 tasks {
