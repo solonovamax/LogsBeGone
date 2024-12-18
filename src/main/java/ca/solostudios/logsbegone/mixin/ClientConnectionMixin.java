@@ -57,11 +57,12 @@ public class ClientConnectionMixin {
             ),
             require = 0
     )
-    private void suppressExceptionOccurredInNettyPipeline(Logger logger, Throwable throwable, Operation<Void> original) {
-        if (throwable instanceof Errors.NativeIoException exception)
+    private void suppressExceptionOccurredInNettyPipeline(Logger logger, String message, Throwable throwable, Operation<Void> original) {
+        if (throwable instanceof Errors.NativeIoException exception) {
             if (exception.expectedErr() == Errors.ERROR_ECONNREFUSED_NEGATIVE ||
                 exception.expectedErr() == Errors.ERRNO_ECONNRESET_NEGATIVE)
                 return;
+        }
 
         if (throwable instanceof ClosedChannelException)
             return;
@@ -70,6 +71,6 @@ public class ClientConnectionMixin {
         else if (throwable instanceof SocketException)
             return;
 
-        original.call(logger, throwable);
+        original.call(logger, message, throwable);
     }
 }
