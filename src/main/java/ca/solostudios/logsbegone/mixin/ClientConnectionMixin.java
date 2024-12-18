@@ -2,7 +2,7 @@
  * Copyright (c) 2024 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file ClientConnectionMixin.java is part of LogsBeGone
- * Last modified on 16-12-2024 07:59 p.m.
+ * Last modified on 18-12-2024 05:30 p.m.
  *
  * MIT License
  *
@@ -41,7 +41,6 @@ import java.net.SocketException;
 import java.nio.channels.ClosedChannelException;
 
 @Mixin(value = ClientConnection.class, priority = 1500)
-@SuppressWarnings("UnresolvedMixinReference")
 public class ClientConnectionMixin {
     @TargetHandler(
             mixin = "io.github.fabricators_of_create.porting_lib.mixin.common.ConnectionMixin",
@@ -57,6 +56,7 @@ public class ClientConnectionMixin {
             ),
             require = 0
     )
+    @SuppressWarnings({"InvalidMemberReference", "MixinAnnotationTarget", "UnresolvedMixinReference"})
     private void suppressExceptionOccurredInNettyPipeline(Logger logger, String message, Throwable throwable, Operation<Void> original) {
         if (throwable instanceof Errors.NativeIoException exception) {
             if (exception.expectedErr() == Errors.ERROR_ECONNREFUSED_NEGATIVE ||

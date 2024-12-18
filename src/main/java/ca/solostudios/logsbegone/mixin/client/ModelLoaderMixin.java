@@ -2,7 +2,7 @@
  * Copyright (c) 2024 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file ModelLoaderMixin.java is part of LogsBeGone
- * Last modified on 16-12-2024 07:59 p.m.
+ * Last modified on 18-12-2024 05:30 p.m.
  *
  * MIT License
  *
@@ -32,7 +32,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@SuppressWarnings({"unresolvable-target", "ALL"})
+@SuppressWarnings("unresolvable-target")
 @Mixin(targets = "net.minecraft.class_1088", remap = false)
 public class ModelLoaderMixin {
     @Redirect(
@@ -45,6 +45,7 @@ public class ModelLoaderMixin {
             require = 0,
             remap = false
     )
+    @SuppressWarnings("UnresolvedMixinReference")
     private static void silenceCouldNotLoadAnimation(Logger logger, String message, Object arg) {
         logger.debug(message, arg);
     }
