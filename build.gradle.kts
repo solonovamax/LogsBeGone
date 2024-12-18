@@ -132,10 +132,16 @@ dependencies {
 
 tasks {
     processResources {
-        inputs.property("version", project.version)
+        val expansion = mapOf(
+            "version" to project.version,
+            "versions" to mapOf(
+                "mixinsquared" to libs.versions.mixinsquared.get(),
+            )
+        )
+        inputs.properties(expansion)
 
         filesMatching("fabric.mod.json") {
-            expand("version" to project.version)
+            expand(expansion)
         }
     }
 }

@@ -9,11 +9,11 @@
         "solonovamax"
     ],
     "contact":       {
-        "website": "https://github.com/solonovamax/LogsBeGone",
-        "repo":    "https://github.com/solonovamax/LogsBeGone",
+        "website":  "https://github.com/solonovamax/LogsBeGone",
+        "repo":     "https://github.com/solonovamax/LogsBeGone",
         "homepage": "https://github.com/solonovamax/LogsBeGone",
-        "issues":  "https://github.com/solonovamax/LogsBeGone/issues",
-        "sources": "https://github.com/solonovamax/LogsBeGone"
+        "issues":   "https://github.com/solonovamax/LogsBeGone/issues",
+        "sources":  "https://github.com/solonovamax/LogsBeGone"
     },
 
     "license":       "MIT",
@@ -31,6 +31,7 @@
     ],
 
     "depends":       {
-        "minecraft": "*"
+        "minecraft":    "*",
+        "mixinsquared": "${versions.mixinsquared}"
     }
 }
