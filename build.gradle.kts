@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2024 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2024-2025 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file build.gradle.kts is part of LogsBeGone
- * Last modified on 18-12-2024 05:29 p.m.
+ * Last modified on 21-01-2025 02:45 p.m.
  *
  * MIT License
  *
@@ -92,7 +92,7 @@ nyx {
             versionType = if (isSnapshot) VersionType.BETA else VersionType.RELEASE
             projectId = "logs-be-gone"
             detectLoaders = true
-            gameVersions = listOf("1.14", "1.15", "1.16", "1.17", "1.18", "1.19", "1.21")
+            gameVersions = listOf("1.14", "1.15", "1.16", "1.17", "1.18", "1.19", "1.20", "1.21")
         }
     }
 }
