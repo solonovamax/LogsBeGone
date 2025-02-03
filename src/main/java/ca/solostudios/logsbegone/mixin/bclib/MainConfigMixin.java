@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2024 solonovamax <solonovamax@12oclockpoint.com>
+ * Copyright (c) 2024-2025 solonovamax <solonovamax@12oclockpoint.com>
  *
  * The file MainConfigMixin.java is part of LogsBeGone
- * Last modified on 18-12-2024 05:36 p.m.
+ * Last modified on 03-02-2025 02:38 p.m.
  *
  * MIT License
  *
@@ -39,12 +39,13 @@ public class MainConfigMixin {
             at = @At(
                     value = "INVOKE",
                     target = "Lorg/betterx/bclib/config/NamedPathConfig$ConfigToken;Boolean(ZLjava/lang/String;Ljava/lang/String;)Lorg/betterx/bclib/config/NamedPathConfig$ConfigToken;",
-                    remap = false
+                    remap = false,
+                    ordinal = 1
             ),
             index = 0,
             remap = false
     )
-    private static boolean tmp(boolean defaultValue) {
+    private static boolean disableVerboseLogging(boolean defaultValue) {
         return false;
     }
 }
